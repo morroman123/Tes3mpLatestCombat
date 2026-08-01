@@ -158,7 +158,29 @@ namespace MWMechanics
 
             // Reduce shield durability by incoming damage
             int shieldhealth = shield->getClass().getItemHealth(*shield);
-            shieldhealth -= std::min(shieldhealth, int(damage));
+
+            //edit
+            int damagetoshieldmodded = damage;
+
+            MWWorld::Ptr player = getPlayer();
+
+            if (blocker == getPlayer())
+            {
+                float armorerSkill = player.getClass().getSkill(player, ESM::Skill::Armorer);
+                armorerSkill = std::min(100.0f, armorerSkill);
+                armorerSkill = std::max(1.0f, armorerSkill);
+
+                float armorerx = 1.0f - (armorerSkill * 0.0075f);
+
+                damagetoshieldmodded *= armourdamagetaken();
+
+                damagetoshieldmodded = static_cast<int>(damagetoshieldmodded * armorerx);
+                damagetoshieldmodded = std::max(1, damagetoshieldmodded);
+            }
+
+            shieldhealth -= std::min(shieldhealth, int(damagetoshieldmodded));
+
+            //shieldhealth -= std::min(shieldhealth, int(damage));
             shield->getCellRef().setCharge(shieldhealth);
             if (shieldhealth == 0)
                 inv.unequipItem(*shield, blocker);
@@ -481,6 +503,25 @@ namespace MWMechanics
             {
                 const float fWeaponDamageMult = MWBase::Environment::get().getWorld()->getStore().get<ESM::GameSetting>().find("fWeaponDamageMult")->mValue.getFloat();
                 float x = std::max(1.f, fWeaponDamageMult * damage);
+
+                //edit
+                MWWorld::Ptr player = MWMechanics::getPlayer();
+                if (attacker == player)
+                {
+                    /// get and clamp armorer skill
+                    float armorerSkill = player.getClass().getSkill(player, ESM::Skill::Armorer);
+                    armorerSkill = std::min(100.0f, armorerSkill);
+                    armorerSkill = std::max(1.0f, armorerSkill);
+
+                    float armorerx = 1.0f - (armorerSkill * 0.0075f);
+
+                    x *= weapondamagetaken();
+
+                    x = (armorerx * x);
+
+                    x = std::max(1.0f, x);
+
+                }
 
                 weaphealth -= std::min(int(x), weaphealth);
                 weapon.getCellRef().setCharge(weaphealth);
