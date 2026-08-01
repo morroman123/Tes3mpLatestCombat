@@ -172,7 +172,7 @@ namespace MWMechanics
 
                 float armorerx = 1.0f - (armorerSkill * 0.0075f);
 
-                damagetoshieldmodded *= armourdamagetaken();
+                //damagetoshieldmodded *= armourdamagetaken();
 
                 damagetoshieldmodded = static_cast<int>(damagetoshieldmodded * armorerx);
                 damagetoshieldmodded = std::max(1, damagetoshieldmodded);
@@ -515,7 +515,7 @@ namespace MWMechanics
 
                     float armorerx = 1.0f - (armorerSkill * 0.0075f);
 
-                    x *= weapondamagetaken();
+                    //x *= weapondamagetaken();
 
                     x = (armorerx * x);
 
