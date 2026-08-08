@@ -22,7 +22,7 @@ namespace MWWorld
     void ActionEquip::executeImp (const Ptr& actor)
     {
         MWWorld::Ptr object = getTarget();
-        MWWorld::InventoryStore& invStore = actor.getClass().getInventoryStore(actor);
+        MWWorld::InventoryStore& invStore = actor.getClass().getContainerStore(actor);
 
         if (object.getClass().hasItemHealth(object) && object.getCellRef().getCharge() == 0)
         {
