@@ -20,8 +20,8 @@ namespace MWWorld
         MWBase::Environment::get().getWorld()->breakInvisibility(actor);
 
         actor.getClass().apply (actor, mId, actor);
-        //edit
-        //actor.getClass().getContainerStore(actor).remove(getTarget(), 1, actor);
+        
+        actor.getClass().getContainerStore(actor).remove(getTarget(), 1, actor);
     }
 
 
