@@ -614,7 +614,7 @@ namespace MWMechanics
                 /////////////////////////////////////////////////////////////////
                 //storage.stopAttack();//base
                  //pathTo(actor, PathFinder::makeOsgVec3(storage.mFleeDest), duration)
-                storage.mMovement.mPosition[0] = Misc::Rng::rollProbability() < 0.5 ? -0.35f : 0.35f;/active
+                storage.mMovement.mPosition[0] = Misc::Rng::rollProbability() < 0.5 ? -0.35f : 0.35f;//active
                 storage.mMovement.mPosition[1] = -1.f;//active
                 //characterController.setAttackingOrSpell(false);//base
                 break;
