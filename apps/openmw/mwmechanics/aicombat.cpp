@@ -612,6 +612,12 @@ namespace MWMechanics
             case AiCombatStorage::Tactical_LeashFlee:
                 //////////////////////////////////////////////////////////////////
                 {
+                    static const float BLIND_RUN_DURATION = 1.0f;
+
+        updateLOS(actor, target, duration, storage);
+
+        AiCombatStorage::FleeState& state = storage.mFleeState;
+                    
                     float triggerDist = getMaxAttackDistance(target);
 
                     if (storage.mLOS &&
