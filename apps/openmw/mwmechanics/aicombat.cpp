@@ -553,7 +553,7 @@ namespace MWMechanics
                 //edit
             else if (updatePursuitLeash(actor, duration, storage))
             {
-                storage.mTacticalState = AiCombatStorage::Tactical_Retreat;
+                storage.mTacticalState = AiCombatStorage::Tactical_LeashFlee;
                 storage.mTacticalTimer = 1.5f;
                 storage.mTacticalCooldown = 0.5f;
                 //stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, true);
@@ -608,6 +608,14 @@ namespace MWMechanics
                 storage.mMovement.mPosition[0] = 1.f;
                 storage.mMovement.mPosition[1] = 0.15f;
                 break;
+            //edit
+            case AiCombatStorage::Tactical_LeashFlee:
+                //storage.stopAttack();
+                storage.mMovement.mPosition[0] = Misc::Rng::rollProbability() < 0.5 ? -0.35f : 0.35f;
+                storage.mMovement.mPosition[1] = -1.f;
+                //characterController.setAttackingOrSpell(false);
+                break;
+            //edit
             case AiCombatStorage::Tactical_CircleLeft:
                 storage.mMovement.mPosition[0] = -1.f;
                 storage.mMovement.mPosition[1] = ranged ? -0.15f : 0.35f;
