@@ -153,11 +153,7 @@ namespace MWMechanics
 
         if (updatePursuitLeash(actor, duration, storage))
         {//edit
-            bool outsideRange = true;
-        }
-        else
-        {
-            outsideRange = false;
+            
         }
             
         
@@ -554,6 +550,18 @@ namespace MWMechanics
                 storage.mTacticalTimer = 0.65f;
                 storage.mTacticalCooldown = 1.8f;
             }
+                //edit
+            else if (updatePursuitLeash(actor, duration, storage))
+            {
+                storage.mTacticalState = AiCombatStorage::Tactical_JumpDodge;
+                storage.mTacticalTimer = 0.38f;
+                storage.mTacticalCooldown = 2.5f;
+                stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, true);
+                storage.mJumpTimer = 0.28f;
+                storage.stopAttack();
+                characterController.setAttackingOrSpell(false);
+            }
+            //edit
             else if (bipedal && distToTarget < std::max(300.f, storage.mAttackRange * 1.35f) && roll < 0.08f)
             {
                 storage.mTacticalState = AiCombatStorage::Tactical_JumpDodge;
