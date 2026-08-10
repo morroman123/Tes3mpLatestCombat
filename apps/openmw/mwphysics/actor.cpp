@@ -251,13 +251,14 @@ void Actor::updateScale()
 {
     //edit
     std::scoped_lock lock(mPositionMutex);
-    float scale = (mPtr.getCellRef().getScale() / 4);
-    osg::Vec3f scaleVec(scale,scale,scale);
+    float scale = mPtr.getCellRef().getScale();
+    float scaleSmall = (mPtr.getCellRef().getScale() / 3);
+    osg::Vec3f scaleVec(scaleSmall,scaleSmall,scale);
 
     mPtr.getClass().adjustScale(mPtr, scaleVec, false);
     mScale = scaleVec;
 
-    scaleVec = osg::Vec3f(scale,scale,scale);
+    scaleVec = osg::Vec3f(scaleSmall,scaleSmall,scale);
     mPtr.getClass().adjustScale(mPtr, scaleVec, true);
     mRenderingScale = scaleVec;
 }
