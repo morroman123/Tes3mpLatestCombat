@@ -156,7 +156,7 @@ namespace MWMechanics
             clearTacticalMovement(actor, storage);
             storage.startFleeing();
             //storage.stopAttack();edit
-            characterController.setAttackingOrSpell(false);
+            //characterController.setAttackingOrSpell(false);
             return true;
         }
 
