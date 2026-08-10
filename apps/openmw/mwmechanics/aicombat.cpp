@@ -153,13 +153,17 @@ namespace MWMechanics
 
         if (updatePursuitLeash(actor, duration, storage))
         {
+            if (!storage.isFleeing())
+            {
             clearTacticalMovement(actor, storage);
+            storage.stopAttack();
             storage.startFleeing();
             //storage.stopAttack();edit
             //characterController.setAttackingOrSpell(false);
             //return true;
             updateFleeing(actor, target, duration, storage);
             //return false;
+            }
         }
 
         if (!storage.isFleeing())
