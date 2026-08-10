@@ -153,7 +153,7 @@ namespace MWMechanics
 
         if (updatePursuitLeash(actor, duration, storage))
         {//edit
-            
+            float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();
         }
             
         
