@@ -926,6 +926,10 @@ namespace MWMechanics
                 //actor.getClass().getCreatureStats(actor);
                 bool sneakTest = actor.getClass().getCreatureStats(actor).getStance(MWMechanics::CreatureStats::Stance_Sneak);//edit
                 const int iVoiceAttackOdds = store.get<ESM::GameSetting>().find("iVoiceAttackOdds")->mValue.getInteger();
+                if (sneaktest)
+                {
+                    iVoiceAttackOdds = 0.f;
+                }
                 if (Misc::Rng::roll0to99() < iVoiceAttackOdds)
                 {
                     MWBase::Environment::get().getDialogueManager()->say(actor, "attack");
