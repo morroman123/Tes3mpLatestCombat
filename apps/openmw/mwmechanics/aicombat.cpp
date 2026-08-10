@@ -157,7 +157,8 @@ namespace MWMechanics
             storage.startFleeing();
             //storage.stopAttack();edit
             //characterController.setAttackingOrSpell(false);
-            return true;
+            //return true;
+            return false;
         }
 
         if (!storage.isFleeing())
