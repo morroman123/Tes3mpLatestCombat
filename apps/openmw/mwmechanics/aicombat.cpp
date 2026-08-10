@@ -193,7 +193,7 @@ namespace MWMechanics
             updateFleeing(actor, target, duration, storage);
         }
             
-        }
+        
 
         if (!storage.isFleeing())
         {
