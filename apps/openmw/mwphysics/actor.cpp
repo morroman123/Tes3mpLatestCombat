@@ -252,7 +252,7 @@ void Actor::updateScale()
     //edit
     std::scoped_lock lock(mPositionMutex);
     float scale = mPtr.getCellRef().getScale();
-    float scaleSmall = (mPtr.getCellRef().getScale() * 0.6);
+    float scaleSmall = (mPtr.getCellRef().getScale() * 0.75);
     osg::Vec3f scaleVec(scaleSmall,scaleSmall,scale);
 
     mPtr.getClass().adjustScale(mPtr, scaleVec, false);
