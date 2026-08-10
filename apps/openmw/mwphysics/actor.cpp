@@ -249,8 +249,9 @@ bool Actor::isRotationallyInvariant() const
 
 void Actor::updateScale()
 {
+    //edit
     std::scoped_lock lock(mPositionMutex);
-    float scale = mPtr.getCellRef().getScale();
+    float scale = (mPtr.getCellRef().getScale() / 4);
     osg::Vec3f scaleVec(scale,scale,scale);
 
     mPtr.getClass().adjustScale(mPtr, scaleVec, false);
