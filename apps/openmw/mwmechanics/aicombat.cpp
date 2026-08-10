@@ -553,11 +553,11 @@ namespace MWMechanics
                 //edit
             else if (updatePursuitLeash(actor, duration, storage))
             {
-                storage.mTacticalState = AiCombatStorage::Tactical_JumpDodge;
-                storage.mTacticalTimer = 0.38f;
-                storage.mTacticalCooldown = 2.5f;
-                stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, true);
-                storage.mJumpTimer = 0.28f;
+                storage.mTacticalState = AiCombatStorage::FleeState_Idle;
+                storage.mTacticalTimer = 1.5f;
+                storage.mTacticalCooldown = 0.5f;
+                //stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, true);
+                //storage.mJumpTimer = 0.28f;
                 storage.stopAttack();
                 characterController.setAttackingOrSpell(false);
             }
