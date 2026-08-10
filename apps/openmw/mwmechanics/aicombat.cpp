@@ -544,7 +544,7 @@ namespace MWMechanics
             const float hpMax = stats.getHealth().getModified();
             const float hpRatio = hpMax > 0.f ? stats.getHealth().getCurrent() / hpMax : 1.f;
 
-            if (hpRatio < 0.35f && distToTarget < 500.f && roll < 0.45f)
+            if (hpRatio < 0.35f && distToTarget < 500.f && roll < 0.45f && bipedal) //edit
             {
                 storage.mTacticalState = AiCombatStorage::Tactical_Retreat;
                 storage.mTacticalTimer = 0.65f;
