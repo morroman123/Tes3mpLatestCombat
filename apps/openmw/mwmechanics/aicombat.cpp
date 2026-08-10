@@ -153,44 +153,11 @@ namespace MWMechanics
 
         if (updatePursuitLeash(actor, duration, storage))
         {//edit
-            if (storage.mCurrentAction.get())
-            {
-                updateLOS(actor, target, duration, storage);
-                const float targetReachedTolerance = storage.mLOS && !storage.mUseCustomDestination
-                        ? storage.mAttackRange : 0.0f;
-                const osg::Vec3f destination = storage.mUseCustomDestination
-                        ? storage.mCustomDestination : target.getRefData().getPosition().asVec3();
-                const bool isTargetReached = pathTo(actor, destination, duration, targetReachedTolerance);
-                if (isTargetReached)
-                    storage.mReadyToAttack = true;
-            }
-            storage.updateCombatMove(duration);
-            updateTacticalMovement(actor, target, duration, storage, characterController);
-            if (storage.mReadyToAttack || storage.hasTacticalMovement())
-                updateActorsMovement(actor, duration, storage);
-            storage.updateAttack(characterController);
-
-            /*
-                Start of tes3mp addition
-
-                Record that this actor is updating an attack so that a packet will be sent about it
-            */
-            mwmp::Attack *localAttack = MechanicsHelper::getLocalAttack(actor);
-
-            if (localAttack && localAttack->pressed != storage.mAttack)
-            {
-                MechanicsHelper::resetAttack(localAttack);
-                localAttack->pressed = storage.mAttack;
-                localAttack->shouldSend = true;
-            }
-            /*
-                End of tes3mp addition
-            */
+            bool outsideRange = true;
         }
         else
         {
-            clearTacticalMovement(actor, storage);
-            updateFleeing(actor, target, duration, storage);
+            outsideRange = false;
         }
             
         
