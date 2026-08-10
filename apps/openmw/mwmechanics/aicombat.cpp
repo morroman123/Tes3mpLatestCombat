@@ -925,8 +925,8 @@ namespace MWMechanics
                 // Say a provoking combat phrase
                 //actor.getClass().getCreatureStats(actor);
                 bool sneakTest = actor.getClass().getCreatureStats(actor).getStance(MWMechanics::CreatureStats::Stance_Sneak);//edit
-                const int iVoiceAttackOdds = store.get<ESM::GameSetting>().find("iVoiceAttackOdds")->mValue.getInteger();
-                if (sneaktest)
+                int iVoiceAttackOdds = store.get<ESM::GameSetting>().find("iVoiceAttackOdds")->mValue.getInteger();
+                if (sneakTest)
                 {
                     iVoiceAttackOdds = 0.f;
                 }
