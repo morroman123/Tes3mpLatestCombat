@@ -558,8 +558,8 @@ namespace MWMechanics
                 storage.mTacticalCooldown = 0.5f;
                 //stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, true);
                 //storage.mJumpTimer = 0.28f;
-                storage.stopAttack();
-                characterController.setAttackingOrSpell(false);
+                //storage.stopAttack();//undecided
+                //characterController.setAttackingOrSpell(false);//undecided
             }
             //edit
             else if (bipedal && distToTarget < std::max(300.f, storage.mAttackRange * 1.35f) && roll < 0.08f)
@@ -611,63 +611,11 @@ namespace MWMechanics
             //edit
             case AiCombatStorage::Tactical_LeashFlee:
                 //////////////////////////////////////////////////////////////////
-                {
-                    static const float BLIND_RUN_DURATION = 1.0f;
-
-        updateLOS(actor, target, duration, storage);
-
-        AiCombatStorage::FleeState& state = storage.mFleeState;
-                    
-                    float triggerDist = getMaxAttackDistance(target);
-
-                    if (storage.mLOS &&
-                            (triggerDist >= 1000 || getDistanceMinusHalfExtents(actor, target) <= triggerDist))
-                    {
-                        const ESM::Pathgrid* pathgrid =
-                                MWBase::Environment::get().getWorld()->getStore().get<ESM::Pathgrid>().search(*storage.mCell->getCell());
-
-                        bool runFallback = true;
-
-                        if (pathgrid != nullptr && !pathgrid->mPoints.empty() && !actor.getClass().isPureWaterCreature(actor))
-                        {
-                            ESM::Pathgrid::PointList points;
-                            Misc::CoordinateConverter coords(storage.mCell->getCell());
-
-                            osg::Vec3f localPos = actor.getRefData().getPosition().asVec3();
-                            coords.toLocal(localPos);
-
-                            int closestPointIndex = PathFinder::getClosestPoint(pathgrid, localPos);
-                            for (int i = 0; i < static_cast<int>(pathgrid->mPoints.size()); i++)
-                            {
-                                if (i != closestPointIndex && getPathGridGraph(storage.mCell).isPointConnected(closestPointIndex, i))
-                                {
-                                    points.push_back(pathgrid->mPoints[static_cast<size_t>(i)]);
-                                }
-                            }
-
-                            if (!points.empty())
-                            {
-                                ESM::Pathgrid::Point dest = points[Misc::Rng::rollDice(points.size())];
-                                coords.toWorld(dest);
-
-                                state = AiCombatStorage::FleeState_RunToDestination;
-                                storage.mFleeDest = ESM::Pathgrid::Point(dest.mX, dest.mY, dest.mZ);
-
-                                runFallback = false;
-                            }
-                        }
-
-                        if (runFallback)
-                        {
-                            state = AiCombatStorage::FleeState_RunBlindly;
-                            storage.mFleeBlindRunTimer = 0.0f;
-                        }
-                    }
-                }
                 /////////////////////////////////////////////////////////////////
                 //storage.stopAttack();//base
-                //storage.mMovement.mPosition[0] = Misc::Rng::rollProbability() < 0.5 ? -0.35f : 0.35f;/active
-                //storage.mMovement.mPosition[1] = -1.f;//active
+                 //pathTo(actor, PathFinder::makeOsgVec3(storage.mFleeDest), duration)
+                storage.mMovement.mPosition[0] = Misc::Rng::rollProbability() < 0.5 ? -0.35f : 0.35f;/active
+                storage.mMovement.mPosition[1] = -1.f;//active
                 //characterController.setAttackingOrSpell(false);//base
                 break;
             //edit
