@@ -616,7 +616,9 @@ namespace MWMechanics
                 /////////////////////////////////////////////////////////////////
                 //storage.stopAttack();//base
                  //pathTo(actor, PathFinder::makeOsgVec3(storage.mFleeDest), duration)
-                forceFlee = true;
+                //forceFlee = true;
+                storage.stopAttack();
+                characterController.setAttackingOrSpell(false);
                     storage.startFleeing();
                 MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
                 
