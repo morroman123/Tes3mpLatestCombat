@@ -157,11 +157,19 @@ namespace MWMechanics
             updateFleeing(actor, target, duration, storage);
             //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
         }
-        if (storage.mTacticalState == AiCombatStorage::Tactical_LeashFlee)//edit
+        //if (storage.mTacticalState == AiCombatStorage::Tactical_LeashFlee)//edit
+        //{
+            //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
+        //}
+        if (storage == AiCombatStorage::FleeState_Idle)//edit
         {
-            MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
+            //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
+            MWBase::Environment::get().getDialogueManager()->say(actor, "attack");
         }
-        
+
+        //AiCombatStorage::FleeState_Idle
+        //AiCombatStorage::FleeState_None
+        //AiCombatStorage::FleeState_RunBlindly
 
         if (!storage.isFleeing())
         {
