@@ -161,7 +161,7 @@ namespace MWMechanics
         //{
             //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
         //}
-        if (storage == AiCombatStorage::FleeState_Idle)//edit
+        if (storage.mFleeState == AiCombatStorage::FleeState_Idle)//edit
         {
             //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
             MWBase::Environment::get().getDialogueManager()->say(actor, "attack");
