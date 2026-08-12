@@ -153,7 +153,9 @@ namespace MWMechanics
 
         if (updatePursuitLeash(actor, duration, storage))
         {//edit
-            float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();
+            float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
+            updateFleeing(actor, target, duration, storage);
+            //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
         }
             
         
@@ -615,6 +617,7 @@ namespace MWMechanics
                 //storage.stopAttack();//base
                  //pathTo(actor, PathFinder::makeOsgVec3(storage.mFleeDest), duration)
                     storage.startFleeing();
+                MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
                 //storage.mMovement.mPosition[0] = Misc::Rng::rollProbability() < 0.5 ? -0.35f : 0.35f;//active
                 //storage.mMovement.mPosition[1] = -1.f;//active
                 //characterController.setAttackingOrSpell(false);//base
