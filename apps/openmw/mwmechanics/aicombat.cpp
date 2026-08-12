@@ -164,13 +164,13 @@ namespace MWMechanics
 
         
 
-        if (!storage.isFleeing() && storage.mTacticalState != AiCombatStorage::Tactical_LeashFlee)//edit
+        if (!storage.isFleeing() && storage.mTacticalState != AiCombatStorage::Tactical_LeashFlee)//edit//not working
         {
             if (storage.mCurrentAction.get())
             {
                 updateLOS(actor, target, duration, storage);
                 const float targetReachedTolerance = storage.mLOS && !storage.mUseCustomDestination
-                        ? storage.mAttackRange : 10.0f;//edit 0.0f
+                        ? storage.mAttackRange : 0.0f;//edit 0.0f
                 const osg::Vec3f destination = storage.mUseCustomDestination
                         ? storage.mCustomDestination : target.getRefData().getPosition().asVec3();
                 const bool isTargetReached = pathTo(actor, destination, duration, targetReachedTolerance);
