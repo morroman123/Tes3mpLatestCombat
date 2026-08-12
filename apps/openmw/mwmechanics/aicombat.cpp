@@ -154,8 +154,9 @@ namespace MWMechanics
         if (updatePursuitLeash(actor, duration, storage))
         {//edit
             float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
-            updateFleeing(actor, target, duration, storage);
+            //updateFleeing(actor, target, duration, storage);
             //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
+            pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration)
         }
         //if (storage.mTacticalState == AiCombatStorage::Tactical_LeashFlee)//edit
         //{
@@ -167,9 +168,7 @@ namespace MWMechanics
             MWBase::Environment::get().getDialogueManager()->say(actor, "attack");
         }
 
-        //AiCombatStorage::FleeState_Idle
-        //AiCombatStorage::FleeState_None
-        //AiCombatStorage::FleeState_RunBlindly
+        
 
         if (!storage.isFleeing())
         {
@@ -177,7 +176,7 @@ namespace MWMechanics
             {
                 updateLOS(actor, target, duration, storage);
                 const float targetReachedTolerance = storage.mLOS && !storage.mUseCustomDestination
-                        ? storage.mAttackRange : 0.0f;
+                        ? storage.mAttackRange : 10.0f;//edit 0.0f
                 const osg::Vec3f destination = storage.mUseCustomDestination
                         ? storage.mCustomDestination : target.getRefData().getPosition().asVec3();
                 const bool isTargetReached = pathTo(actor, destination, duration, targetReachedTolerance);
