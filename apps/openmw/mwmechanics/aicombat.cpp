@@ -157,21 +157,14 @@ namespace MWMechanics
             //updateFleeing(actor, target, duration, storage);
             //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
             //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
-            pathTo(actor, storage.mCombatOrigin, duration);
+            //pathTo(actor, storage.mCombatOrigin, duration);
         }
-        //if (storage.mTacticalState == AiCombatStorage::Tactical_LeashFlee)//edit
-        //{
-            //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
-        //}
-        if (storage.mFleeState == AiCombatStorage::FleeState_Idle)//edit
-        {
-            //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
-            MWBase::Environment::get().getDialogueManager()->say(actor, "attack");
-        }
+        
+        
 
         
 
-        if (!storage.isFleeing())
+        if (!storage.isFleeing() && storage.mTacticalState != AiCombatStorage::Tactical_LeashFlee)//edit
         {
             if (storage.mCurrentAction.get())
             {
@@ -630,7 +623,8 @@ namespace MWMechanics
                 //forceFlee = true;
                 storage.stopAttack();
                 characterController.setAttackingOrSpell(false);
-                    storage.startFleeing();
+                pathTo(actor, storage.mCombatOrigin, duration);
+                    //storage.startFleeing();
                 //currentAction.reset(new ActionFlee());
                 //actionCooldown = currentAction->getActionCooldown();
                 //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
