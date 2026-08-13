@@ -137,7 +137,7 @@ namespace MWMechanics
         bool isFleeing();
         bool hasTacticalMovement() const;
         bool suppressesAttack() const;
-        bool Tactical_LeashFleeState() const;
+        bool Tactical_LeashFleeState() const;//edit
     };
 
     /// \brief Causes the actor to fight another actor
