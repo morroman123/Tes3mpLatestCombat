@@ -151,7 +151,9 @@ namespace MWMechanics
             return true;
         }
 
-        if (updatePursuitLeash(actor, duration, storage))
+        if 
+        //if (updatePursuitLeash(actor, duration, storage))//active
+          if (storage.mTacticalState == AiCombatStorage::Tactical_LeashFlee)
         {//edit
             float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
             //updateFleeing(actor, target, duration, storage);
