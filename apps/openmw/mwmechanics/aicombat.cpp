@@ -157,7 +157,7 @@ namespace MWMechanics
             //updateFleeing(actor, target, duration, storage);
             //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
             //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
-            //pathTo(actor, storage.mCombatOrigin, duration);
+            pathTo(actor, storage.mCombatOrigin, duration);
         }
         
         
