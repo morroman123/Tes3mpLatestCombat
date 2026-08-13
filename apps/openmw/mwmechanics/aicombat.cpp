@@ -157,7 +157,7 @@ namespace MWMechanics
             //updateFleeing(actor, target, duration, storage);
             //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
             //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
-            pathTo(actor, storage.mCombatOrigin, duration);
+            //pathTo(actor, storage.mCombatOrigin, duration);
         }
         
         
@@ -562,7 +562,7 @@ namespace MWMechanics
             else if (updatePursuitLeash(actor, duration, storage))
             {
                 storage.mTacticalState = AiCombatStorage::Tactical_LeashFlee;
-                storage.mTacticalTimer = 1.5f;
+                storage.mTacticalTimer = 5.5f;
                 storage.mTacticalCooldown = 0.5f;
                 //stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, true);
                 //storage.mJumpTimer = 0.28f;
