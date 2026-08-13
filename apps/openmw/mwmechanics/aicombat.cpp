@@ -153,13 +153,14 @@ namespace MWMechanics
 
         
         //if (updatePursuitLeash(actor, duration, storage))//active
-          if (storage.mTacticalState == AiCombatStorage::Tactical_LeashFlee)
+          if (storage.mTacticalState == AiCombatStorage::Tactical_LeashFlee)//broke
         {//edit
             float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
             //updateFleeing(actor, target, duration, storage);
             //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
             //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
             pathTo(actor, storage.mCombatOrigin, duration);//active
+            MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
         }
         
         
@@ -1030,6 +1031,11 @@ namespace MWMechanics
     {
         return mTacticalState == Tactical_Retreat || mTacticalState == Tactical_JumpDodge
             || mTacticalState == Tactical_Unstuck;
+    }
+
+    bool AiCombatStorage::Tactical_LeashFleeState() const
+    {
+        return mTacticalState == Tactical_LeashFlee;//edit
     }
 }
 
