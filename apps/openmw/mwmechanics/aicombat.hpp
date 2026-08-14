@@ -182,7 +182,7 @@ namespace MWMechanics
                 AiCombatStorage& storage, CharacterController& characterController);
             void clearTacticalMovement(const MWWorld::Ptr& actor, AiCombatStorage& storage);
             bool updatePursuitLeash(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage);
-            bool Tactical_LeashFleeState(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage);//edit
+            //bool Tactical_LeashFleeState(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage);//edit
             
 
             /// Transfer desired movement (from AiCombatStorage) to Actor
