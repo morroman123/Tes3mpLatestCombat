@@ -155,14 +155,27 @@ namespace MWMechanics
         if (updatePursuitLeash(actor, duration, storage))//active
           //if (storage.Tactical_LeashFleeState())
         {//edit
-            float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
+            //float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
             //updateFleeing(actor, target, duration, storage);
             //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
             //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
             //pathTo(actor, storage.mCombatOrigin, duration);//active
             //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
-            updateTacticalMovement(actor, target, duration, storage, characterController);
-            updateActorsMovement(actor, duration, storage);
+            //updateTacticalMovement(actor, target, duration, storage, characterController);
+            //updateActorsMovement(actor, duration, storage);
+        }
+
+        if (updatePursuitLeash2(actor, duration, storage))//active
+          
+        {//edit
+            float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
+            //updateFleeing(actor, target, duration, storage);
+            //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
+            //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
+            pathTo(actor, storage.mCombatOrigin, duration);//active
+            //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
+            //updateTacticalMovement(actor, target, duration, storage, characterController);
+            //updateActorsMovement(actor, duration, storage);
         }
         
         
@@ -660,11 +673,11 @@ bool AiCombat::updatePursuitLeash2(const MWWorld::Ptr& actor, float duration, Ai
                 //forceFlee = true;
                 storage.stopAttack();
                 characterController.setAttackingOrSpell(false);
-                pathTo(actor, storage.mCombatOrigin, duration);
+                //pathTo(actor, storage.mCombatOrigin, duration);
                     //storage.startFleeing();
                 //currentAction.reset(new ActionFlee());
                 //actionCooldown = currentAction->getActionCooldown();
-                MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
+                //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
                 
                 
                 //storage.mMovement.mPosition[0] = Misc::Rng::rollProbability() < 0.5 ? -0.35f : 0.35f;//active
