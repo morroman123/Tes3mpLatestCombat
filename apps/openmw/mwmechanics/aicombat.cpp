@@ -1034,10 +1034,10 @@ namespace MWMechanics
             || mTacticalState == Tactical_Unstuck;
     }
 
-    bool AiCombat::Tactical_LeashFleeState(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage) 
-    {
-        return mTacticalState == Tactical_LeashFlee;//edit
-    }
+    //bool AiCombat::Tactical_LeashFleeState(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage) 
+    //{
+        //return mTacticalState == Tactical_LeashFlee;//edit
+    //}
 }
 
 
