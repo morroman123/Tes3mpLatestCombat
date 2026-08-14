@@ -176,6 +176,9 @@ namespace MWMechanics
             //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
             //updateTacticalMovement(actor, target, duration, storage, characterController);
             //updateActorsMovement(actor, duration, storage);
+            storage.updateCombatMove(duration);
+            updateTacticalMovement(actor, target, duration, storage, characterController);
+            updateActorsMovement(actor, duration, storage);
         }
         
         
