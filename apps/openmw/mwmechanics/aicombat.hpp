@@ -137,7 +137,8 @@ namespace MWMechanics
         bool isFleeing();
         bool hasTacticalMovement() const;
         bool suppressesAttack() const;
-        bool Tactical_LeashFleeState() const;//edit
+        //bool Tactical_LeashFleeState() const;//edit
+        
     };
 
     /// \brief Causes the actor to fight another actor
@@ -181,7 +182,8 @@ namespace MWMechanics
                 AiCombatStorage& storage, CharacterController& characterController);
             void clearTacticalMovement(const MWWorld::Ptr& actor, AiCombatStorage& storage);
             bool updatePursuitLeash(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage);
-            bool Tactical(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage);//edit
+            bool Tactical_LeashFleeState(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage);//edit
+            
 
             /// Transfer desired movement (from AiCombatStorage) to Actor
             void updateActorsMovement(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage);
