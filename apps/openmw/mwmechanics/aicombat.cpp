@@ -162,6 +162,7 @@ namespace MWMechanics
             //pathTo(actor, storage.mCombatOrigin, duration);//active
             //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
             updateTacticalMovement(actor, target, duration, storage, characterController);
+            updateActorsMovement(actor, duration, storage);
         }
         
         
@@ -447,7 +448,37 @@ namespace MWMechanics
 
         return storage.mLeashExceededTimer >= 1.5f;
     }
+//////////////////////////////////////////////////////edit
+bool AiCombat::updatePursuitLeash2(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage)
+    {
+        if (mwmp::Main::isInitialized()
+            && !mwmp::Main::get().getCellController()->isLocalActor(actor))
+            return false;
 
+        const MWWorld::CellStore* actorCell = actor.getCell();
+        const osg::Vec3f actorPos = actor.getRefData().getPosition().asVec3();
+        if (!storage.mCombatOriginSet || storage.mCombatOriginCell != actorCell)
+        {
+            storage.mCombatOrigin = actorPos;
+            storage.mCombatOriginCell = actorCell;
+            storage.mCombatOriginSet = true;
+            storage.mLeashExceededTimer = 0.f;
+            return false;
+        }
+
+        const float maxDistance = 4000.f;
+        if (maxDistance <= 0.f)
+            return false;
+
+        const float distanceFromOrigin = distanceIgnoreZ(storage.mCombatOrigin, actorPos);
+        if (distanceFromOrigin > maxDistance)
+            storage.mLeashExceededTimer += duration;
+        else
+            storage.mLeashExceededTimer = std::max(0.f, storage.mLeashExceededTimer - duration * 2.f);
+
+        return storage.mLeashExceededTimer >= 1.5f;
+    }
+//////////////////////////////////////////////////////////////////
     void AiCombat::clearTacticalMovement(const MWWorld::Ptr& actor, AiCombatStorage& storage)
     {
         const bool controlsActor = !mwmp::Main::isInitialized()
