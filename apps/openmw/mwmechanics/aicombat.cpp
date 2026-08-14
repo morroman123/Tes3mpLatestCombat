@@ -489,7 +489,7 @@ bool AiCombat::updatePursuitLeash2(const MWWorld::Ptr& actor, float duration, Ai
         //else
             //storage.mLeashExceededTimer = std::max(0.f, storage.mLeashExceededTimer - duration * 0.1f);
 
-        return storage.mLeashExceededTimer >= 1.5f;
+        return storage.mLeashExceededTimer >= 15.5f;
     }
 //////////////////////////////////////////////////////////////////
     void AiCombat::clearTacticalMovement(const MWWorld::Ptr& actor, AiCombatStorage& storage)
