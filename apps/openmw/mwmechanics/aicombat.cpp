@@ -571,7 +571,7 @@ namespace MWMechanics
         storage.mTacticalDecisionTimer = std::max(0.f, storage.mTacticalDecisionTimer - duration);
 
         //const osg::Vec3f actorPos = actor.getRefData().getPosition().asVec3();//edit
-        actorPosZ = actorPos.z();//edit
+        float actorPosZ = actorPos.z();//edit
         
 
         if (storage.mJumpTimer > 0.f)
