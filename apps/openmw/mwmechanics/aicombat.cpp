@@ -614,7 +614,7 @@ namespace MWMechanics
                 storage.mTacticalCooldown = 1.8f;
             }
                 //edit
-            else if (updatePursuitLeash(actor, duration, storage))
+            else if (updatePursuitLeash(actor, target, duration, storage))
             {
                 storage.mTacticalState = AiCombatStorage::Tactical_LeashFlee;
                 storage.mTacticalTimer = 5.5f;
