@@ -152,7 +152,7 @@ namespace MWMechanics
         }
 
         
-        if (updatePursuitLeash(actor, target, duration, storage))//active
+        //if (updatePursuitLeash(actor, target, duration, storage))//active
           
         {//edit
             //float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active//disable for test
@@ -168,18 +168,18 @@ namespace MWMechanics
             //}
             //else
             //{
-            pathTo(actor, storage.mCombatOrigin, duration);//active
+            //pathTo(actor, storage.mCombatOrigin, duration);//active
             //storage.updateCombatMove(duration);//needed?
             //updateTacticalMovement(actor, target, duration, storage, characterController);
             
             //}
-        }
+        //}
         
         
 
         
-    if (!updatePursuitLeash(actor, target, duration, storage))
-    {
+    //if (!updatePursuitLeash(actor, target, duration, storage))
+    //{
         if (!storage.isFleeing())//edit//not working
         {
             if (storage.mCurrentAction.get())
@@ -217,7 +217,7 @@ namespace MWMechanics
                 End of tes3mp addition
             */
         }
-    }
+    //}
         else
         {
             clearTacticalMovement(actor, storage);
@@ -454,20 +454,20 @@ namespace MWMechanics
         if (distanceFromOrigin > maxDistance)
             storage.mLeashExceededTimer += duration;
         //else//base
-        if (distanceFromOrigin <= maxDistance)//time to return to start, slowly turn false
-            storage.mLeashExceededTimer = std::max(0.f, storage.mLeashExceededTimer - duration * 0.2f);
+        //if (distanceFromOrigin <= maxDistance)//time to return to start, slowly turn false
+            //storage.mLeashExceededTimer = std::max(0.f, storage.mLeashExceededTimer - duration * 0.2f);
 
         //distance from player to origin
-        float distTargOrigin = (target.getRefData().getPosition().asVec3() - storage.mCombatOrigin).length();//edit
-        float distTargOriginNoZ = distanceIgnoreZ(target.getRefData().getPosition().asVec3(), storage.mCombatOrigin);
+        //float distTargOrigin = (target.getRefData().getPosition().asVec3() - storage.mCombatOrigin).length();//edit
+        //float distTargOriginNoZ = distanceIgnoreZ(target.getRefData().getPosition().asVec3(), storage.mCombatOrigin);
 
-        float distTarg = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//edit
-        float distTargNoZ = distanceIgnoreZ(actor.getRefData().getPosition().asVec3(), target.getRefData().getPosition().asVec3());
-        if (distTarg > 2000 && distanceFromOrigin > 2000)//edit retreat if chasing but player gets too far away, make true
-            storage.mLeashExceededTimer += duration;
+        //float distTarg = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//edit
+        //float distTargNoZ = distanceIgnoreZ(actor.getRefData().getPosition().asVec3(), target.getRefData().getPosition().asVec3());
+        //if (distTarg > 2000 && distanceFromOrigin > 2000)//edit retreat if chasing but player gets too far away, make true
+            //storage.mLeashExceededTimer += duration;
 
-        if(distTarg < 1000)//make false if player is close
-            storage.mLeashExceededTimer = 0;
+        //if(distTarg < 1000)//make false if player is close
+            //storage.mLeashExceededTimer = 0;
             
         return storage.mLeashExceededTimer >= 1.5f;
     }
@@ -482,10 +482,10 @@ namespace MWMechanics
         {
             MWMechanics::CreatureStats& stats = actor.getClass().getCreatureStats(actor);
             stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, false);
-            if (storage.mTacticalState == AiCombatStorage::Tactical_SneakApproach)
-            {
+            //if (storage.mTacticalState == AiCombatStorage::Tactical_SneakApproach)
+            //{
             stats.setMovementFlag(CreatureStats::Flag_ForceSneak, false);
-            }
+            //}
         }
 
         storage.mTacticalState = AiCombatStorage::Tactical_None;
@@ -523,9 +523,9 @@ namespace MWMechanics
         storage.mTacticalCooldown = std::max(0.f, storage.mTacticalCooldown - duration);
         storage.mTacticalDecisionTimer = std::max(0.f, storage.mTacticalDecisionTimer - duration);
 
-        const osg::Vec3f targetPos = target.getRefData().getPosition().asVec3();//edit
-        float targetPosZ = targetPos.z();
-        float actorPosZ = actorPos.z();//edit
+        //const osg::Vec3f targetPos = target.getRefData().getPosition().asVec3();//edit
+        //float targetPosZ = targetPos.z();
+        //float actorPosZ = actorPos.z();//edit
         
 
         if (storage.mJumpTimer > 0.f)
@@ -655,14 +655,14 @@ namespace MWMechanics
                 storage.mMovement.mPosition[1] = 0.15f;
                 break;
             //edit
-            case AiCombatStorage::Tactical_LeashFlee:
+            //case AiCombatStorage::Tactical_LeashFlee:
                 //////////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////////
                 //storage.stopAttack();//base
                  //pathTo(actor, PathFinder::makeOsgVec3(storage.mFleeDest), duration)
                 //forceFlee = true;
-                storage.stopAttack();
-                characterController.setAttackingOrSpell(false);
+                //storage.stopAttack();
+                //characterController.setAttackingOrSpell(false);
                 //pathTo(actor, storage.mCombatOrigin, duration);
                     //storage.startFleeing();
                 //currentAction.reset(new ActionFlee());
@@ -673,7 +673,7 @@ namespace MWMechanics
                 //storage.mMovement.mPosition[0] = Misc::Rng::rollProbability() < 0.5 ? -0.35f : 0.35f;//active
                 //storage.mMovement.mPosition[1] = -1.f;//active
                 //characterController.setAttackingOrSpell(false);//base
-                break;
+                //break;
             //edit
             case AiCombatStorage::Tactical_CircleLeft:
                 storage.mMovement.mPosition[0] = -1.f;
@@ -1002,12 +1002,12 @@ namespace MWMechanics
 
                 // Say a provoking combat phrase
                 //actor.getClass().getCreatureStats(actor);
-                bool sneakTest = actor.getClass().getCreatureStats(actor).getStance(MWMechanics::CreatureStats::Stance_Sneak);//edit
+                //bool sneakTest = actor.getClass().getCreatureStats(actor).getStance(MWMechanics::CreatureStats::Stance_Sneak);//edit
                 int iVoiceAttackOdds = store.get<ESM::GameSetting>().find("iVoiceAttackOdds")->mValue.getInteger();
-                if (sneakTest)
-                {
-                    iVoiceAttackOdds = 0.f;
-                }
+                //if (sneakTest)
+                //{
+                    //iVoiceAttackOdds = 0.f;
+                //}
                 if (Misc::Rng::roll0to99() < iVoiceAttackOdds)
                 {
                     MWBase::Environment::get().getDialogueManager()->say(actor, "attack");
