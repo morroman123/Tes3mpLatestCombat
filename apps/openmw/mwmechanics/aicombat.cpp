@@ -460,11 +460,16 @@ namespace MWMechanics
         const float distanceFromOrigin = distanceIgnoreZ(storage.mCombatOrigin, actorPos);
         if (distanceFromOrigin > maxDistance)
             storage.mLeashExceededTimer += duration;
-        else
+        //else//base
+        if (distanceFromOrigin <= maxDistance)
             storage.mLeashExceededTimer = std::max(0.f, storage.mLeashExceededTimer - duration * 0.2f);
 
-        float distTarg = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//edit
         
+
+        float distTarg = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//edit
+        if (distTarg > 2000 && distanceFromOrigin > 2000)//edit
+            storage.mLeashExceededTimer += duration;
+            
         return storage.mLeashExceededTimer >= 1.5f;
     }
 //////////////////////////////////////////////////////edit
