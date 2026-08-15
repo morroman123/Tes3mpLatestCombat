@@ -551,7 +551,7 @@ namespace MWDialogue
         float curDisp = static_cast<float>(MWBase::Environment::get().getMechanicsManager()->getDerivedDisposition(mActor, false));
         if (curDisp + mTemporaryDispositionChange < 0)
             mTemporaryDispositionChange = -curDisp;
-        else if (curDisp + mTemporaryDispositionChange > 100)
+        else if (curDisp + mTemporaryDispositionChange > 110)//edit base 100
             mTemporaryDispositionChange = 100 - curDisp;
 
         MWWorld::Ptr player = MWMechanics::getPlayer();
@@ -638,6 +638,10 @@ namespace MWDialogue
             // Actor is already saying something.
             return;
         }
+         if (actor.getClass().getCreatureStats(actor).getStance(MWMechanics::CreatureStats::Stance_Sneak))
+         {
+             return;//edit
+         }
 
         if (actor.getClass().isNpc() && MWBase::Environment::get().getWorld()->isSwimming(actor))
         {
