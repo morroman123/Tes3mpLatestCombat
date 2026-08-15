@@ -152,45 +152,27 @@ namespace MWMechanics
         }
 
         
-       // if (updatePursuitLeash2(actor, duration, storage))//active
-          //if (storage.Tactical_LeashFleeState())
-       // {//edit
-            //float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
-            //updateFleeing(actor, target, duration, storage);
-            //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
-            //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
-            //pathTo(actor, storage.mCombatOrigin, duration);//active
-            //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
-            //updateTacticalMovement(actor, target, duration, storage, characterController);
-            //updateActorsMovement(actor, duration, storage);
-       // }
-
         if (updatePursuitLeash(actor, target, duration, storage))//active
           
         {//edit
-            float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
-            float distNoZ = distanceIgnoreZ(actor.getRefData().getPosition().asVec3(), target.getRefData().getPosition().asVec3());
-            //updateFleeing(actor, target, duration, storage);
-            //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
-            //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
-            if (dist > 4000)
-            {
-                clearTacticalMovement(actor, storage);
-            storage.stopAttack();
-            characterController.setAttackingOrSpell(false);
-            return true;
-            }
-            else
-            {
+            //float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active//disable for test
+            //float distNoZ = distanceIgnoreZ(actor.getRefData().getPosition().asVec3(), target.getRefData().getPosition().asVec3());//disablefortest
+            
+            
+            //if (dist > 4000)
+            //{
+                //clearTacticalMovement(actor, storage);
+            //storage.stopAttack();
+            //characterController.setAttackingOrSpell(false);
+            //return true;
+            //}
+            //else
+            //{
             pathTo(actor, storage.mCombatOrigin, duration);//active
-            //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
+            //storage.updateCombatMove(duration);//needed?
             //updateTacticalMovement(actor, target, duration, storage, characterController);
-            //updateActorsMovement(actor, duration, storage);
-            ////////////////////////
-            storage.updateCombatMove(duration);
-            updateTacticalMovement(actor, target, duration, storage, characterController);
-            //updateActorsMovement(actor, duration, storage);//breaks
-            }
+            
+            //}
         }
         
         
@@ -490,36 +472,7 @@ namespace MWMechanics
         return storage.mLeashExceededTimer >= 1.5f;
     }
 //////////////////////////////////////////////////////edit
-//bool AiCombat::updatePursuitLeash2(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage)
-//    {
-   //     if (mwmp::Main::isInitialized()
-  //          && !mwmp::Main::get().getCellController()->isLocalActor(actor))
-  //          return false;
 
-  //      const MWWorld::CellStore* actorCell = actor.getCell();
-  //      const osg::Vec3f actorPos = actor.getRefData().getPosition().asVec3();
-  //      if (!storage.mCombatOriginSet || storage.mCombatOriginCell != actorCell)
-    //    {
-        //    storage.mCombatOrigin = actorPos;
-        //    storage.mCombatOriginCell = actorCell;
-       //     storage.mCombatOriginSet = true;
-       //     storage.mLeashExceededTimer = 0.f;
-      //      return false;
-      //  }
-
-     //   const float maxDistance = 4000.f;
-     //   if (maxDistance <= 0.f)
-     //       return false;
-
-     //   const float distanceFromOrigin = distanceIgnoreZ(storage.mCombatOrigin, actorPos);
-     //   if (distanceFromOrigin > maxDistance)
-     //       storage.mLeashExceededTimer += duration;
-     //   else
-      //      storage.mLeashExceededTimer = std::max(0.f, storage.mLeashExceededTimer - duration * 0.01f);
-
-     //   return storage.mLeashExceededTimer >= 15.5f;
-        //return true;
-   // }
 //////////////////////////////////////////////////////////////////
     void AiCombat::clearTacticalMovement(const MWWorld::Ptr& actor, AiCombatStorage& storage)
     {
