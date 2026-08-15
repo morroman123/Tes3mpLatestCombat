@@ -183,8 +183,8 @@ namespace MWMechanics
         
 
         
-    if (!updatePursuitLeash(actor, target, duration, storage))
-    {
+    //if (!updatePursuitLeash(actor, target, duration, storage))//change
+   // {
         if (!storage.isFleeing())//edit//not working
         {
             if (storage.mCurrentAction.get())
@@ -222,7 +222,7 @@ namespace MWMechanics
                 End of tes3mp addition
             */
         }
-    }
+   // }
         else
         {
             clearTacticalMovement(actor, storage);
