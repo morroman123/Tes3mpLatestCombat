@@ -165,7 +165,7 @@ namespace MWMechanics
             //updateActorsMovement(actor, duration, storage);
        // }
 
-        if (updatePursuitLeash(actor, duration, storage))//active
+        if (updatePursuitLeash(actor, target, duration, storage))//active
           
         {//edit
             //float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
@@ -436,7 +436,7 @@ namespace MWMechanics
         return false;
     }
 
-    bool AiCombat::updatePursuitLeash(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage)
+    bool AiCombat::updatePursuitLeash(const MWWorld::Ptr& actor, const MWWorld::Ptr& target, float duration, AiCombatStorage& storage)
     {
         if (mwmp::Main::isInitialized()
             && !mwmp::Main::get().getCellController()->isLocalActor(actor))
