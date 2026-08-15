@@ -475,7 +475,9 @@ namespace MWMechanics
         if (distanceFromOrigin <= maxDistance)//time to return to start, slowly turn false
             storage.mLeashExceededTimer = std::max(0.f, storage.mLeashExceededTimer - duration * 0.2f);
 
-        
+        //distance from player to origin
+        float distTargOrigin = (target.getRefData().getPosition().asVec3() - storage.mCombatOrigin).length();//edit
+        float distTargOriginNoZ = distanceIgnoreZ(target.getRefData().getPosition().asVec3(), storage.mCombatOrigin);
 
         float distTarg = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//edit
         float distTargNoZ = distanceIgnoreZ(actor.getRefData().getPosition().asVec3(), target.getRefData().getPosition().asVec3());
@@ -527,7 +529,10 @@ namespace MWMechanics
         {
             MWMechanics::CreatureStats& stats = actor.getClass().getCreatureStats(actor);
             stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, false);
+            if (storage.mTacticalState == AiCombatStorage::Tactical_SneakApproach)
+            {
             stats.setMovementFlag(CreatureStats::Flag_ForceSneak, false);
+            }
         }
 
         storage.mTacticalState = AiCombatStorage::Tactical_None;
@@ -634,16 +639,16 @@ namespace MWMechanics
                 storage.mTacticalCooldown = 1.8f;
             }
                 //edit
-            else if (updatePursuitLeash(actor, target, duration, storage))
-            {
-                storage.mTacticalState = AiCombatStorage::Tactical_LeashFlee;
-                storage.mTacticalTimer = 5.5f;
-                storage.mTacticalCooldown = 0.5f;
+            //else if (updatePursuitLeash(actor, target, duration, storage))
+            //{
+                //storage.mTacticalState = AiCombatStorage::Tactical_LeashFlee;//active
+                //storage.mTacticalTimer = 5.5f;//active
+                //storage.mTacticalCooldown = 0.5f;//active
                 //stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, true);
                 //storage.mJumpTimer = 0.28f;
                 //storage.stopAttack();//undecided
                 //characterController.setAttackingOrSpell(false);//undecided
-            }
+            //}
             //edit
             else if (bipedal && distToTarget < std::max(300.f, storage.mAttackRange * 1.35f) && roll < 0.08f)
             {
