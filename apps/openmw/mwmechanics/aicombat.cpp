@@ -472,14 +472,18 @@ namespace MWMechanics
         if (distanceFromOrigin > maxDistance)
             storage.mLeashExceededTimer += duration;
         //else//base
-        if (distanceFromOrigin <= maxDistance)
+        if (distanceFromOrigin <= maxDistance)//time to return to start, slowly turn false
             storage.mLeashExceededTimer = std::max(0.f, storage.mLeashExceededTimer - duration * 0.2f);
 
         
 
         float distTarg = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//edit
-        if (distTarg > 2000 && distanceFromOrigin > 2000)//edit
+        float distTargNoZ = distanceIgnoreZ(actor.getRefData().getPosition().asVec3(), target.getRefData().getPosition().asVec3());
+        if (distTarg > 2000 && distanceFromOrigin > 2000)//edit retreat if chasing but player gets too far away, make true
             storage.mLeashExceededTimer += duration;
+
+        if(distTarg < 1000)//make false if player is close
+            storage.mLeashExceededTimer = 0;
             
         return storage.mLeashExceededTimer >= 1.5f;
     }
