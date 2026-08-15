@@ -570,7 +570,8 @@ namespace MWMechanics
         storage.mTacticalCooldown = std::max(0.f, storage.mTacticalCooldown - duration);
         storage.mTacticalDecisionTimer = std::max(0.f, storage.mTacticalDecisionTimer - duration);
 
-        //const osg::Vec3f actorPos = actor.getRefData().getPosition().asVec3();//edit
+        const osg::Vec3f targetPos = target.getRefData().getPosition().asVec3();//edit
+        float targetPosZ = targetPos.z();
         float actorPosZ = actorPos.z();//edit
         
 
