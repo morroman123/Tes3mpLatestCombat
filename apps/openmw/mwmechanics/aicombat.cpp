@@ -168,10 +168,17 @@ namespace MWMechanics
         if (updatePursuitLeash(actor, target, duration, storage))//active
           
         {//edit
-            //float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
+            float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
+            float distNoZ = distanceIgnoreZ(actor, target);
             //updateFleeing(actor, target, duration, storage);
             //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
             //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
+            if (dist > 4000)
+            {
+                return false
+            }
+            else
+            {
             pathTo(actor, storage.mCombatOrigin, duration);//active
             //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
             //updateTacticalMovement(actor, target, duration, storage, characterController);
@@ -180,6 +187,7 @@ namespace MWMechanics
             storage.updateCombatMove(duration);
             updateTacticalMovement(actor, target, duration, storage, characterController);
             //updateActorsMovement(actor, duration, storage);//breaks
+            }
         }
         
         
