@@ -169,13 +169,16 @@ namespace MWMechanics
           
         {//edit
             float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
-            float distNoZ = distanceIgnoreZ(actor, target);
+            float distNoZ = distanceIgnoreZ(actor.getRefData().getPosition().asVec3(), target.getRefData().getPosition().asVec3());
             //updateFleeing(actor, target, duration, storage);
             //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
             //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
             if (dist > 4000)
             {
-                return false
+                clearTacticalMovement(actor, storage);
+            storage.stopAttack();
+            characterController.setAttackingOrSpell(false);
+            return true;
             }
             else
             {
