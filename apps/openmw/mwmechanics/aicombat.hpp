@@ -181,8 +181,8 @@ namespace MWMechanics
             void updateTacticalMovement(const MWWorld::Ptr& actor, const MWWorld::Ptr& target, float duration,
                 AiCombatStorage& storage, CharacterController& characterController);
             void clearTacticalMovement(const MWWorld::Ptr& actor, AiCombatStorage& storage);
-            bool updatePursuitLeash(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage);
-            bool updatePursuitLeash2(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage);
+            bool updatePursuitLeash(const MWWorld::Ptr& actor, const MWWorld::Ptr& target, float duration, AiCombatStorage& storage);
+            bool updatePursuitLeash2(const MWWorld::Ptr& actor,float duration, AiCombatStorage& storage);
             //bool Tactical_LeashFleeState(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage);//edit
             
 
