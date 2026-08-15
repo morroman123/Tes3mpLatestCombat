@@ -185,7 +185,7 @@ namespace MWMechanics
         
 
         
-    if (!updatePursuitLeash(actor, duration, storage))
+    if (!updatePursuitLeash(actor, target, duration, storage))
     {
         if (!storage.isFleeing())//edit//not working
         {
