@@ -168,7 +168,7 @@ namespace MWMechanics
         if (updatePursuitLeash(actor, duration, storage))//active
           
         {//edit
-            float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
+            //float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
             //updateFleeing(actor, target, duration, storage);
             //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
             //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
@@ -179,7 +179,7 @@ namespace MWMechanics
             ////////////////////////
             storage.updateCombatMove(duration);
             updateTacticalMovement(actor, target, duration, storage, characterController);
-            //updateActorsMovement(actor, duration, storage);//broke with three above
+            //updateActorsMovement(actor, duration, storage);//breaks
         }
         
         
@@ -463,6 +463,8 @@ namespace MWMechanics
         else
             storage.mLeashExceededTimer = std::max(0.f, storage.mLeashExceededTimer - duration * 0.2f);
 
+        float distTarg = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//edit
+        
         return storage.mLeashExceededTimer >= 1.5f;
     }
 //////////////////////////////////////////////////////edit
