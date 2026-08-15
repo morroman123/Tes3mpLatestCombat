@@ -64,6 +64,7 @@ namespace MWMechanics
             Tactical_StrafeLeft,
             Tactical_StrafeRight,
             Tactical_LeashFlee,//edit
+            Tactical_JumpReach,//edit
             Tactical_CircleLeft,
             Tactical_CircleRight,
             Tactical_Retreat,
