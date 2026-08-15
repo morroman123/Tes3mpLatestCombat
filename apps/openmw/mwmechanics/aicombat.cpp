@@ -152,16 +152,30 @@ namespace MWMechanics
         }
 
         
-        //if (updatePursuitLeash(actor, target, duration, storage))//active
+       // if (updatePursuitLeash2(actor, duration, storage))//active
+          //if (storage.Tactical_LeashFleeState())
+       // {//edit
+            //float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
+            //updateFleeing(actor, target, duration, storage);
+            //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
+            //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
+            //pathTo(actor, storage.mCombatOrigin, duration);//active
+            //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
+            //updateTacticalMovement(actor, target, duration, storage, characterController);
+            //updateActorsMovement(actor, duration, storage);
+       // }
+
+        if (updatePursuitLeash(actor, target, duration, storage))//active
           
         {//edit
-            //float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active//disable for test
-            //float distNoZ = distanceIgnoreZ(actor.getRefData().getPosition().asVec3(), target.getRefData().getPosition().asVec3());//disablefortest
-            
-            
+            //float dist = (actor.getRefData().getPosition().asVec3() - target.getRefData().getPosition().asVec3()).length();//active
+            //float distNoZ = distanceIgnoreZ(actor.getRefData().getPosition().asVec3(), target.getRefData().getPosition().asVec3());
+            //updateFleeing(actor, target, duration, storage);
+            //actorClass.getCreatureStats(actor).setMovementFlag(CreatureStats::Flag_Run, true);//use after true to run back
+            //pathTo(actor, PathFinder::makeOsgVec3(storage.mCombatOrigin), duration);
             //if (dist > 4000)
             //{
-                //clearTacticalMovement(actor, storage);
+            //    clearTacticalMovement(actor, storage);
             //storage.stopAttack();
             //characterController.setAttackingOrSpell(false);
             //return true;
@@ -169,11 +183,15 @@ namespace MWMechanics
             //else
             //{
             //pathTo(actor, storage.mCombatOrigin, duration);//active
-            //storage.updateCombatMove(duration);//needed?
+            //MWBase::Environment::get().getDialogueManager()->say(actor, "flee");
             //updateTacticalMovement(actor, target, duration, storage, characterController);
-            
+            //updateActorsMovement(actor, duration, storage);
+            ////////////////////////
+            //storage.updateCombatMove(duration);
+            //updateTacticalMovement(actor, target, duration, storage, characterController);
+            //updateActorsMovement(actor, duration, storage);//breaks
             //}
-        //}
+        }
         
         
 
@@ -472,7 +490,36 @@ namespace MWMechanics
         return storage.mLeashExceededTimer >= 1.5f;
     }
 //////////////////////////////////////////////////////edit
+//bool AiCombat::updatePursuitLeash2(const MWWorld::Ptr& actor, float duration, AiCombatStorage& storage)
+//    {
+   //     if (mwmp::Main::isInitialized()
+  //          && !mwmp::Main::get().getCellController()->isLocalActor(actor))
+  //          return false;
 
+  //      const MWWorld::CellStore* actorCell = actor.getCell();
+  //      const osg::Vec3f actorPos = actor.getRefData().getPosition().asVec3();
+  //      if (!storage.mCombatOriginSet || storage.mCombatOriginCell != actorCell)
+    //    {
+        //    storage.mCombatOrigin = actorPos;
+        //    storage.mCombatOriginCell = actorCell;
+       //     storage.mCombatOriginSet = true;
+       //     storage.mLeashExceededTimer = 0.f;
+      //      return false;
+      //  }
+
+     //   const float maxDistance = 4000.f;
+     //   if (maxDistance <= 0.f)
+     //       return false;
+
+     //   const float distanceFromOrigin = distanceIgnoreZ(storage.mCombatOrigin, actorPos);
+     //   if (distanceFromOrigin > maxDistance)
+     //       storage.mLeashExceededTimer += duration;
+     //   else
+      //      storage.mLeashExceededTimer = std::max(0.f, storage.mLeashExceededTimer - duration * 0.01f);
+
+     //   return storage.mLeashExceededTimer >= 15.5f;
+        //return true;
+   // }
 //////////////////////////////////////////////////////////////////
     void AiCombat::clearTacticalMovement(const MWWorld::Ptr& actor, AiCombatStorage& storage)
     {
@@ -482,10 +529,10 @@ namespace MWMechanics
         {
             MWMechanics::CreatureStats& stats = actor.getClass().getCreatureStats(actor);
             stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, false);
-            //if (storage.mTacticalState == AiCombatStorage::Tactical_SneakApproach)
-            //{
+            if (storage.mTacticalState == AiCombatStorage::Tactical_SneakApproach)
+            {
             stats.setMovementFlag(CreatureStats::Flag_ForceSneak, false);
-            //}
+            }
         }
 
         storage.mTacticalState = AiCombatStorage::Tactical_None;
@@ -523,9 +570,9 @@ namespace MWMechanics
         storage.mTacticalCooldown = std::max(0.f, storage.mTacticalCooldown - duration);
         storage.mTacticalDecisionTimer = std::max(0.f, storage.mTacticalDecisionTimer - duration);
 
-        //const osg::Vec3f targetPos = target.getRefData().getPosition().asVec3();//edit
-        //float targetPosZ = targetPos.z();
-        //float actorPosZ = actorPos.z();//edit
+        const osg::Vec3f targetPos = target.getRefData().getPosition().asVec3();//edit
+        float targetPosZ = targetPos.z();
+        float actorPosZ = actorPos.z();//edit
         
 
         if (storage.mJumpTimer > 0.f)
@@ -655,14 +702,14 @@ namespace MWMechanics
                 storage.mMovement.mPosition[1] = 0.15f;
                 break;
             //edit
-            //case AiCombatStorage::Tactical_LeashFlee:
+            case AiCombatStorage::Tactical_LeashFlee:
                 //////////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////////
                 //storage.stopAttack();//base
                  //pathTo(actor, PathFinder::makeOsgVec3(storage.mFleeDest), duration)
                 //forceFlee = true;
-                //storage.stopAttack();
-                //characterController.setAttackingOrSpell(false);
+                storage.stopAttack();
+                characterController.setAttackingOrSpell(false);
                 //pathTo(actor, storage.mCombatOrigin, duration);
                     //storage.startFleeing();
                 //currentAction.reset(new ActionFlee());
@@ -673,7 +720,7 @@ namespace MWMechanics
                 //storage.mMovement.mPosition[0] = Misc::Rng::rollProbability() < 0.5 ? -0.35f : 0.35f;//active
                 //storage.mMovement.mPosition[1] = -1.f;//active
                 //characterController.setAttackingOrSpell(false);//base
-                //break;
+                break;
             //edit
             case AiCombatStorage::Tactical_CircleLeft:
                 storage.mMovement.mPosition[0] = -1.f;
@@ -1002,12 +1049,12 @@ namespace MWMechanics
 
                 // Say a provoking combat phrase
                 //actor.getClass().getCreatureStats(actor);
-                //bool sneakTest = actor.getClass().getCreatureStats(actor).getStance(MWMechanics::CreatureStats::Stance_Sneak);//edit
+                bool sneakTest = actor.getClass().getCreatureStats(actor).getStance(MWMechanics::CreatureStats::Stance_Sneak);//edit
                 int iVoiceAttackOdds = store.get<ESM::GameSetting>().find("iVoiceAttackOdds")->mValue.getInteger();
-                //if (sneakTest)
-                //{
-                    //iVoiceAttackOdds = 0.f;
-                //}
+                if (sneakTest)
+                {
+                    iVoiceAttackOdds = 0.f;
+                }
                 if (Misc::Rng::roll0to99() < iVoiceAttackOdds)
                 {
                     MWBase::Environment::get().getDialogueManager()->say(actor, "attack");
