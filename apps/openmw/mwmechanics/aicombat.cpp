@@ -196,8 +196,8 @@ namespace MWMechanics
         }
             }
 
-        if (!updatePursuitLeash(actor, target, duration, storage))
-        {
+        //if (!updatePursuitLeash(actor, target, duration, storage))
+        //{
             storage.updateCombatMove(duration);
             updateTacticalMovement(actor, target, duration, storage, characterController);
             if (storage.mReadyToAttack || storage.hasTacticalMovement())
@@ -220,7 +220,7 @@ namespace MWMechanics
             /*
                 End of tes3mp addition
             */
-        }//pursuit
+        //}//pursuit
         }
     
         else
