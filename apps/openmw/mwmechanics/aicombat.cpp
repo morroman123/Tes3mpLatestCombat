@@ -175,7 +175,10 @@ namespace MWMechanics
             }
         }
         
-        
+        if (!updatePursuitLeash(actor, target, duration, storage))
+        {
+            updateTacticalMovement(actor, target, duration, storage, characterController);
+        }
 
         
     
