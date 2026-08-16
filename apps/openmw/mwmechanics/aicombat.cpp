@@ -602,12 +602,13 @@ namespace MWMechanics
                 storage.mTacticalCooldown = 1.8f;
             }
             ///////////////////////////////////////////////////////
-                else if (updatePursuitLeash(actor, target, duration, storage))
+                else if ((targetPosZ - actorPosZ) > 500)
             {
+                
                 storage.mTacticalState = AiCombatStorage::Tactical_JumpReach;//active
-                //storage.mTacticalTimer = 5.5f;//active
-                //storage.mTacticalCooldown = 0.5f;//active
-                //stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, true);
+                storage.mTacticalTimer = 5.5f;//active
+                storage.mTacticalCooldown = 0.5f;//active
+                stats.setMovementFlag(CreatureStats::Flag_ForceJump, true);
                 //storage.mJumpTimer = 0.28f;
                 //storage.stopAttack();//undecided
                 //characterController.setAttackingOrSpell(false);//undecided
