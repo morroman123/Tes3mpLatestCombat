@@ -194,9 +194,12 @@ namespace MWMechanics
                         ? storage.mAttackRange : 0.0f;
                 const osg::Vec3f destination = storage.mUseCustomDestination
                         ? storage.mCustomDestination : target.getRefData().getPosition().asVec3();
+                if (!updatePursuitLeash(actor, target, duration, storage))
+        {
                 const bool isTargetReached = pathTo(actor, destination, duration, targetReachedTolerance);
                 if (isTargetReached)
                     storage.mReadyToAttack = true;
+        }
             }
 
         if (!updatePursuitLeash(actor, target, duration, storage))
