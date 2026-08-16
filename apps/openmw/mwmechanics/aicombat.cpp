@@ -601,6 +601,17 @@ namespace MWMechanics
                 storage.mTacticalTimer = 0.65f;
                 storage.mTacticalCooldown = 1.8f;
             }
+            ///////////////////////////////////////////////////////
+                else if (updatePursuitLeash(actor, target, duration, storage))
+            {
+                storage.mTacticalState = AiCombatStorage::Tactical_JumpReach;//active
+                //storage.mTacticalTimer = 5.5f;//active
+                //storage.mTacticalCooldown = 0.5f;//active
+                //stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, true);
+                //storage.mJumpTimer = 0.28f;
+                //storage.stopAttack();//undecided
+                //characterController.setAttackingOrSpell(false);//undecided
+            }
                 //edit
             //else if (updatePursuitLeash(actor, target, duration, storage))
             //{
@@ -613,6 +624,7 @@ namespace MWMechanics
                 //characterController.setAttackingOrSpell(false);//undecided
             //}
             //edit
+            /////////////////////////////////////////////////////
             else if (bipedal && distToTarget < std::max(300.f, storage.mAttackRange * 1.35f) && roll < 0.08f)
             {
                 storage.mTacticalState = AiCombatStorage::Tactical_JumpDodge;
@@ -660,6 +672,9 @@ namespace MWMechanics
                 storage.mMovement.mPosition[1] = 0.15f;
                 break;
             //edit
+            /////////////////////////////////////////////////////////////////////////
+            case AiCombatStorage::Tactical_JumpReach:
+           
             case AiCombatStorage::Tactical_LeashFlee:
                 //////////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////////
@@ -679,6 +694,7 @@ namespace MWMechanics
                 //storage.mMovement.mPosition[1] = -1.f;//active
                 //characterController.setAttackingOrSpell(false);//base
                 break;
+            /////////////////////////////////////////////////////////////////
             //edit
             case AiCombatStorage::Tactical_CircleLeft:
                 storage.mMovement.mPosition[0] = -1.f;
