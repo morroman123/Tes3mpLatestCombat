@@ -487,6 +487,7 @@ namespace MWMechanics
         {
             MWMechanics::CreatureStats& stats = actor.getClass().getCreatureStats(actor);
             stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, false);
+            stats.setMovementFlag(CreatureStats::Flag_ForceJump, false);//edit for jumpreach
             if (storage.mTacticalState == AiCombatStorage::Tactical_SneakApproach)
             {
             stats.setMovementFlag(CreatureStats::Flag_ForceSneak, false);
@@ -606,7 +607,7 @@ namespace MWMechanics
             {
                 
                 storage.mTacticalState = AiCombatStorage::Tactical_JumpReach;//active
-                storage.mTacticalTimer = 5.5f;//active
+                storage.mTacticalTimer = 0.5f;//active
                 storage.mTacticalCooldown = 0.5f;//active
                 stats.setMovementFlag(CreatureStats::Flag_ForceJump, true);
                 //storage.mJumpTimer = 0.28f;
