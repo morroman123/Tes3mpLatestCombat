@@ -551,8 +551,8 @@ namespace MWDialogue
         float curDisp = static_cast<float>(MWBase::Environment::get().getMechanicsManager()->getDerivedDisposition(mActor, false));
         if (curDisp + mTemporaryDispositionChange < 0)
             mTemporaryDispositionChange = -curDisp;
-        else if (curDisp + mTemporaryDispositionChange > 100)
-            mTemporaryDispositionChange = 100 - curDisp;
+        else if (curDisp + mTemporaryDispositionChange > 120)//edit
+            mTemporaryDispositionChange = 120 - curDisp;//edit
 
         MWWorld::Ptr player = MWMechanics::getPlayer();
         player.getClass().skillUsageSucceeded(player, ESM::Skill::Speechcraft, success ? 0 : 1);
