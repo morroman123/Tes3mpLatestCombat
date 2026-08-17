@@ -202,7 +202,7 @@ namespace MWMechanics
         //if (!updatePursuitLeash(actor, target, duration, storage))
         //{
             storage.updateCombatMove(duration);
-            updateTacticalMovement(actor, target, duration, storage, characterController);
+            //updateTacticalMovement(actor, target, duration, storage, characterController);//BASE
             if (storage.mReadyToAttack || storage.hasTacticalMovement())
                 updateActorsMovement(actor, duration, storage);
             storage.updateAttack(characterController);
@@ -541,7 +541,10 @@ namespace MWMechanics
         {
             storage.mJumpTimer -= duration;
             if (storage.mJumpTimer <= 0.f)
+            {
                 stats.setMovementFlag(CreatureStats::Flag_ForceMoveJump, false);
+                stats.setMovementFlag(CreatureStats::Flag_ForceJump, false);//ediT
+            }
         }
         if (storage.mSneakTimer > 0.f)
         {
@@ -610,10 +613,10 @@ namespace MWMechanics
             {
                 
                 storage.mTacticalState = AiCombatStorage::Tactical_JumpReach;//active
-                storage.mTacticalTimer = 0.5f;//active
+                storage.mTacticalTimer = 0.38f;//active
                 storage.mTacticalCooldown = 0.5f;//active
                 stats.setMovementFlag(CreatureStats::Flag_ForceJump, true);
-                //storage.mJumpTimer = 0.28f;
+                storage.mJumpTimer = 0.28f;
                 //storage.stopAttack();//undecided
                 //characterController.setAttackingOrSpell(false);//undecided
             }
