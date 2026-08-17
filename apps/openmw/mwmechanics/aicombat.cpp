@@ -609,7 +609,7 @@ namespace MWMechanics
                 storage.mTacticalCooldown = 1.8f;
             }
             ///////////////////////////////////////////////////////
-                else if (((targetPosZ - actorPosZ) > 150) && ((targetPosZ - actorPosZ) < 300 ) && (distanceIgnoreZ(actorPos, targetPos) < 125))
+                else if (((targetPosZ - actorPosZ) > 150) && ((targetPosZ - actorPosZ) < 300 ) && (distanceIgnoreZ(actorPos, targetPos) < 200))
             {
                 
                 storage.mTacticalState = AiCombatStorage::Tactical_JumpReach;//active
