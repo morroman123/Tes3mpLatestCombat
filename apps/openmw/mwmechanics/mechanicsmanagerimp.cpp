@@ -758,7 +758,7 @@ namespace MWMechanics
 
 
         float cappedDispositionChange = tempChange;
-        if (currentDisposition + tempChange > 100.f)
+        if (currentDisposition + tempChange > 120.f)
             cappedDispositionChange = static_cast<float>(120 - currentDisposition);//edit
         if (currentDisposition + tempChange < 0.f)
             cappedDispositionChange = static_cast<float>(-currentDisposition);
