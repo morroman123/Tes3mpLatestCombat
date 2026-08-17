@@ -579,7 +579,7 @@ namespace MWMechanics
         if(addTemporaryDispositionChange)
           x += MWBase::Environment::get().getDialogueManager()->getTemporaryDispositionChange();
 
-        int effective_disposition = std::max(0,std::min(int(x),100));//, normally clamped to [0..100] when used
+        int effective_disposition = std::max(0,std::min(int(x),120));//, normally clamped to [0..100] when used
         return effective_disposition;
     }
 
