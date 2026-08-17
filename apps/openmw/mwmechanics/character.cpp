@@ -2981,6 +2981,7 @@ void CharacterController::setVisibility(float visibility)
         //float playerSneak = getPlayer().getClass().getSkill(mPtr, ESM::Skill::Sneak);
         
         MWWorld::Ptr player = MWMechanics::getPlayer();//edit test
+        float playerSneak = player.getClass().getSkill(player, ESM::Skill::Sneak);
         
         bool sneakTest = mPtr.getClass().getCreatureStats(mPtr).getStance(MWMechanics::CreatureStats::Stance_Sneak);
         float npcSneak = mPtr.getClass().getSkill(mPtr, ESM::Skill::Sneak);
