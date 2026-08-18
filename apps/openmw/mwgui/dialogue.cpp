@@ -820,7 +820,8 @@ namespace MWGui
     {
         bool dispositionVisible = false;
 
-        MWWorld::Ptr playerPtr = getPlayer();//EDIT
+        //MWWorld::Ptr player = MWMechanics::getPlayer();
+        MWWorld::Ptr playerPtr = MWMechanics::getPlayer();//EDIT
         float personality = playerPtr.getClass().getCreatureStats(playerPtr).getAttribute(ESM::Attribute::Personality).getModified();//edit
         float persMult = (55.f + (personality / 2.2f));
         
