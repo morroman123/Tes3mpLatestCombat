@@ -830,6 +830,7 @@ namespace MWGui
     //ss << "Age: " << persMult << ";
         std::ostringstream oss;
         oss << "Item: " << persMult << "\n";
+        std::string formattedReceipt = oss.str();
         
         if (!mPtr.isEmpty() && mPtr.getClass().isNpc())
         {
