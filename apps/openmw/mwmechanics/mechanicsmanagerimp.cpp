@@ -579,6 +579,9 @@ namespace MWMechanics
         if(addTemporaryDispositionChange)
           x += MWBase::Environment::get().getDialogueManager()->getTemporaryDispositionChange();
 
+        float personality = playerPtr.getClass().getCreatureStats(playerPtr).getAttribute(ESM::Attribute::Personality).getModified();//edit
+        float persMult = (55.f + (personality / 2.2f));
+
         int effective_disposition = std::max(0,std::min(int(x),120));//, normally clamped to [0..100] when used//edit
         return effective_disposition;
     }
@@ -757,6 +760,8 @@ namespace MWMechanics
         tempChange = type == PT_Intimidate ? x : int(x * fPerTempMult);
         
         float personality = playerPtr.getClass().getCreatureStats(playerPtr).getAttribute(ESM::Attribute::Personality).getModified();//edit
+        float persMult = (55.f + (personality / 2.2f));
+        
         float cappedDispositionChange = tempChange;
         if (currentDisposition + tempChange > 120.f)
             cappedDispositionChange = static_cast<float>(120 - currentDisposition);//edit
