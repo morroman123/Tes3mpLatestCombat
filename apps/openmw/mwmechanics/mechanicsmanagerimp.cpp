@@ -581,6 +581,7 @@ namespace MWMechanics
 
         float personality = playerPtr.getClass().getCreatureStats(playerPtr).getAttribute(ESM::Attribute::Personality).getModified();//edit
         float persMult = (55.f + (personality / 2.2f));//base
+        float persMult2 = std::min(100,persMult);
         //float persMult = std::min(100,(55.f + (personality / 2.2f)));
         //int intTest = 100;
         //std::min(100,int(persMult))
