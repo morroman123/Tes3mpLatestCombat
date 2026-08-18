@@ -824,6 +824,7 @@ namespace MWGui
         MWWorld::Ptr playerPtr = MWMechanics::getPlayer();//EDIT
         float personality = playerPtr.getClass().getCreatureStats(playerPtr).getAttribute(ESM::Attribute::Personality).getModified();//edit
         float persMult = (55.f + (personality / 2.2f));
+        std::string DispoMax = std::format("/{}",persMult);
         
         if (!mPtr.isEmpty() && mPtr.getClass().isNpc())
         {
