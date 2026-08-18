@@ -824,9 +824,9 @@ namespace MWGui
         //MWWorld::Ptr player = MWMechanics::getPlayer();
         MWWorld::Ptr playerPtr = MWMechanics::getPlayer();//EDIT
         float personality = playerPtr.getClass().getCreatureStats(playerPtr).getAttribute(ESM::Attribute::Personality).getModified();//edit
-        //float persMult = (55.f + (personality / 2.2f));
-        float persMult = std::min(100,(55.f + (personality / 2.2f)));
-        int persMultInt = static_cast<int>(persMult);
+        float persMult = (55.f + (personality / 2.2f));
+        //float persMult = std::min(100,(55.f + (personality / 2.2f)));
+        int persMultInt = std::min(100,(static_cast<int>(persMult)));
         //std::string DispoMax = std::format("/{}",persMult);
         //std::ostringstream ss = << "Age: " << persMult << ";
     //ss << "Age: " << persMult << ";
