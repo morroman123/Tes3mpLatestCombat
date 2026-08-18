@@ -2997,7 +2997,8 @@ void CharacterController::setVisibility(float visibility)
         {
             if (mPtr != getPlayer())
          //sneakMult = 0.25f * sneakRatio;
-            sneakMult = (8 / (npcSneak - playerSneak));//edit
+            sneakMult = ((8 / npcSneak) + (playerSneak / 200)) ;//edit//base
+            //sneakMult = 0.7f * sneakRatio;
         }
 
         //if sneakMult > 0.5f
