@@ -582,7 +582,7 @@ namespace MWMechanics
         float personality = playerPtr.getClass().getCreatureStats(playerPtr).getAttribute(ESM::Attribute::Personality).getModified();//edit
         float persMult = (55.f + (personality / 2.2f));
 
-        int effective_disposition = std::max(0,std::min(int(x),120));//, normally clamped to [0..100] when used//edit
+        int effective_disposition = std::max(0,std::min(int(x),persMult));//, normally clamped to [0..100] when used//edit
         return effective_disposition;
     }
 
@@ -763,8 +763,8 @@ namespace MWMechanics
         float persMult = (55.f + (personality / 2.2f));
         
         float cappedDispositionChange = tempChange;
-        if (currentDisposition + tempChange > 120.f)
-            cappedDispositionChange = static_cast<float>(120 - currentDisposition);//edit
+        if (currentDisposition + tempChange > persMult)
+            cappedDispositionChange = static_cast<float>(persMult - currentDisposition);//edit
         if (currentDisposition + tempChange < 0.f)
             cappedDispositionChange = static_cast<float>(-currentDisposition);
 
