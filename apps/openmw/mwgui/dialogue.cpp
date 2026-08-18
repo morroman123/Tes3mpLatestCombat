@@ -40,6 +40,7 @@
 #include "textcolours.hpp"
 
 #include "journalbooks.hpp" // to_utf8_span
+#include <format> //edit
 
 namespace MWGui
 {
