@@ -546,15 +546,19 @@ namespace MWDialogue
                     success, temp, perm);
         mTemporaryDispositionChange += temp;
         mPermanentDispositionChange += perm;
-
+        
+        MWWorld::Ptr player = MWMechanics::getPlayer();
+        float personality = player.getClass().getCreatureStats(player).getAttribute(ESM::Attribute::Personality).getModified();//edit
+        float persMult = (55.f + (personality / 2.2f));
+        
         // change temp disposition so that final disposition is between 0...100
         float curDisp = static_cast<float>(MWBase::Environment::get().getMechanicsManager()->getDerivedDisposition(mActor, false));
         if (curDisp + mTemporaryDispositionChange < 0)
             mTemporaryDispositionChange = -curDisp;
-        else if (curDisp + mTemporaryDispositionChange > 120)//edit
-            mTemporaryDispositionChange = 120 - curDisp;//edit
+        else if (curDisp + mTemporaryDispositionChange > persMult)//edit
+            mTemporaryDispositionChange = persMult - curDisp;//edit
 
-        MWWorld::Ptr player = MWMechanics::getPlayer();
+        //MWWorld::Ptr player = MWMechanics::getPlayer();//base
         player.getClass().skillUsageSucceeded(player, ESM::Skill::Speechcraft, success ? 0 : 1);
 
         if (success)
