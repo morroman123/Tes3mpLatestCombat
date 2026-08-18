@@ -826,8 +826,9 @@ namespace MWGui
         float personality = playerPtr.getClass().getCreatureStats(playerPtr).getAttribute(ESM::Attribute::Personality).getModified();//edit
         float persMult = (55.f + (personality / 2.2f));
         //std::string DispoMax = std::format("/{}",persMult);
-        std::ostringstream ss = << "Age: " << persMult << ";
+        //std::ostringstream ss = << "Age: " << persMult << ";
     //ss << "Age: " << persMult << ";
+        std::ostringstream oss;
         
         if (!mPtr.isEmpty() && mPtr.getClass().isNpc())
         {
