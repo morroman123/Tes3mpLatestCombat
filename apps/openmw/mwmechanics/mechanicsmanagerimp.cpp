@@ -580,11 +580,12 @@ namespace MWMechanics
           x += MWBase::Environment::get().getDialogueManager()->getTemporaryDispositionChange();
 
         float personality = playerPtr.getClass().getCreatureStats(playerPtr).getAttribute(ESM::Attribute::Personality).getModified();//edit
-        float persMult = (55.f + (personality / 2.2f));
+        //float persMult = (55.f + (personality / 2.2f));//base
+        float persMult = std::min(100,(55.f + (personality / 2.2f)));
         //int intTest = 100;
         //std::min(100,int(persMult))
-        //int effective_disposition = std::max(0,std::min(int(x),int(persMult)));//, normally clamped to [0..100] when used//edit
-        int effective_disposition = std::max(0,std::min(int(x),std::min(100,int(persMult))));//, normally clamped to [0..100] when used//edit
+        int effective_disposition = std::max(0,std::min(int(x),int(persMult)));//, normally clamped to [0..100] when used//edit
+        //int effective_disposition = std::max(0,std::min(int(x),std::min(100,int(persMult))));//, normally clamped to [0..100] when used//edit
         return effective_disposition;
     }
 
@@ -762,7 +763,7 @@ namespace MWMechanics
         tempChange = type == PT_Intimidate ? x : int(x * fPerTempMult);
         
         float personality = playerPtr.getClass().getCreatureStats(playerPtr).getAttribute(ESM::Attribute::Personality).getModified();//edit
-        float persMult = (55.f + (personality / 2.2f));
+        float persMult = std::min(100,(55.f + (personality / 2.2f)));
         
         float cappedDispositionChange = tempChange;
         if (currentDisposition + tempChange > persMult)
