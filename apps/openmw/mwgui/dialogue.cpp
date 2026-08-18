@@ -819,11 +819,14 @@ namespace MWGui
     void DialogueWindow::updateDisposition()
     {
         bool dispositionVisible = false;
-        if (!mPtr.isEmpty() && mPtr.getClass().isNpc())
-        {
-            MWWorld::Ptr playerPtr = getPlayer();//EDIT
+
+        MWWorld::Ptr playerPtr = getPlayer();//EDIT
         float personality = playerPtr.getClass().getCreatureStats(playerPtr).getAttribute(ESM::Attribute::Personality).getModified();//edit
         float persMult = (55.f + (personality / 2.2f));
+        
+        if (!mPtr.isEmpty() && mPtr.getClass().isNpc())
+        {
+            
             
             dispositionVisible = true;
             mDispositionBar->setProgressRange(persMult);
