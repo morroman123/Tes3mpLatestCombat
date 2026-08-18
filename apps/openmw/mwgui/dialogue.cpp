@@ -829,6 +829,7 @@ namespace MWGui
         //std::ostringstream ss = << "Age: " << persMult << ";
     //ss << "Age: " << persMult << ";
         std::ostringstream oss;
+        oss << "Item: " << persMult << "\n";
         
         if (!mPtr.isEmpty() && mPtr.getClass().isNpc())
         {
