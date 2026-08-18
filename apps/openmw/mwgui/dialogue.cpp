@@ -821,8 +821,12 @@ namespace MWGui
         bool dispositionVisible = false;
         if (!mPtr.isEmpty() && mPtr.getClass().isNpc())
         {
+            MWWorld::Ptr playerPtr = getPlayer();//EDIT
+        float personality = playerPtr.getClass().getCreatureStats(playerPtr).getAttribute(ESM::Attribute::Personality).getModified();//edit
+        float persMult = (55.f + (personality / 2.2f));
+            
             dispositionVisible = true;
-            mDispositionBar->setProgressRange(100);
+            mDispositionBar->setProgressRange(persMult);
             mDispositionBar->setProgressPosition(MWBase::Environment::get().getMechanicsManager()->getDerivedDisposition(mPtr));
             mDispositionText->setCaption(MyGUI::utility::toString(MWBase::Environment::get().getMechanicsManager()->getDerivedDisposition(mPtr))+std::string("/100"));
         }
