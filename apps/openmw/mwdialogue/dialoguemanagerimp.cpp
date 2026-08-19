@@ -549,8 +549,8 @@ namespace MWDialogue
         
         MWWorld::Ptr player = MWMechanics::getPlayer();
         float personality = player.getClass().getCreatureStats(player).getAttribute(ESM::Attribute::Personality).getModified();//edit
-        float persMult = (55.f + (personality / 2.2f));
-        //float persMult = std::min(100,(55.f + (personality / 2.2f)));
+        //float persMult = (55.f + (personality / 2.2f));
+        float persMult = std::min(100.f,(55.f + (personality / 2.2f)));
         
         // change temp disposition so that final disposition is between 0...100
         float curDisp = static_cast<float>(MWBase::Environment::get().getMechanicsManager()->getDerivedDisposition(mActor, false));
