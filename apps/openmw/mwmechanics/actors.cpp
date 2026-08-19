@@ -465,7 +465,7 @@ namespace MWMechanics
     void Actors::updateActor (const MWWorld::Ptr& ptr, float duration)
     {
         //
-            //float level = ptr.getClass().getCreatureStats(ptr).getLevel();
+            //float level = ptr.getClass().getCreatureStats(ptr).getLevel();//edit
         
             //float strength = ptr.getClass().getCreatureStats(ptr).getAttribute(ESM::Attribute::Strength).getModified();
             //float strengthBase = ptr.getClass().getCreatureStats(ptr).getAttribute(ESM::Attribute::Strength).getBase();
@@ -523,8 +523,8 @@ namespace MWMechanics
                 float fatigueSet = (strength + endurance + agility + willpower + fortFatigue);
                 float strengthMod = (strength - strengthBase) / 2;
                 float enduranceMod = (endurance - enduranceBase) / 2;
-                float levelEnduranceScale = ( level * (enduranceBase * 4) / 125 ); 
-                float healthSet = ((strengthBase + strengthMod) * 0.2 ) + (((enduranceBase + enduranceMod) * 1.5) + fortHealth) + (level * 1.5) + levelEnduranceScale + 25;
+                float levelEnduranceScale = ( level * (enduranceBase * 3) / 125 ); 
+                float healthSet = ((strengthBase + strengthMod) * 0.2 ) + (((enduranceBase + enduranceMod) * 1.5) + fortHealth) + (level * 1.5) + levelEnduranceScale + 20;
 
                 if( health.getBase() != healthSet )
                 {
