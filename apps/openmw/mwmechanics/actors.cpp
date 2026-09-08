@@ -984,6 +984,13 @@ namespace MWMechanics
         
         magicka.setModified(magicka.getModified() + diff, 0);//orig
         magicka.setCurrent(magicka.getBase() * currentToBaseRatio, false, true);//orig
+
+        //fort current fix edit blocck
+        //float diffHealth = (strength+willpower+agility+endurance) - health.getBase();
+                float currentToBaseRatioHealth = health.getBase() > 0 ? (health.getCurrent() / health.getBase()) : 0;
+                //health.setModified(health.getModified() + diffHealth, 0);
+                health.setCurrent(health.getBase() * currentToBaseRatioHealth);
+                setHealth(health);
         
         //magicka.setModified(1, 0);//edit
         //magicka.setCurrent(1, false, true);//edit
@@ -1217,8 +1224,8 @@ namespace MWMechanics
         for (int i = 0; i < 3; ++i)
         {
             DynamicStat<float> stat = creatureStats.getDynamic(i);
-            //float fortify = effects.get(ESM::MagicEffect::FortifyHealth + i).getMagnitude();//base
-            float fortify = 0;//edit
+            float fortify = effects.get(ESM::MagicEffect::FortifyHealth + i).getMagnitude();//base
+            //float fortify = 0;//edit
             float drain = 0.f;
             if (!godmode)
                 drain = effects.get(ESM::MagicEffect::DrainHealth + i).getMagnitude();
