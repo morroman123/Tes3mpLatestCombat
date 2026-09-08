@@ -1217,7 +1217,8 @@ namespace MWMechanics
         for (int i = 0; i < 3; ++i)
         {
             DynamicStat<float> stat = creatureStats.getDynamic(i);
-            float fortify = effects.get(ESM::MagicEffect::FortifyHealth + i).getMagnitude();
+            //float fortify = effects.get(ESM::MagicEffect::FortifyHealth + i).getMagnitude();//base
+            float fortify = 0;//edit
             float drain = 0.f;
             if (!godmode)
                 drain = effects.get(ESM::MagicEffect::DrainHealth + i).getMagnitude();
