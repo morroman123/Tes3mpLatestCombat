@@ -990,7 +990,8 @@ namespace MWMechanics
                 float currentToBaseRatioHealth = health.getBase() > 0 ? (health.getCurrent() / health.getBase()) : 0;
                 //health.setModified(health.getModified() + diffHealth, 0);
                 health.setCurrent(health.getBase() * currentToBaseRatioHealth);
-                setHealth(health);
+                ptr.getClass().getCreatureStats(ptr).setHealth(health);
+                //setHealth(health);
         
         //magicka.setModified(1, 0);//edit
         //magicka.setCurrent(1, false, true);//edit
